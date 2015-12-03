@@ -89,6 +89,10 @@ define([], function(){
 		$('.showTagCloud').bind("click",function(){
 				slide(1);
 		});
+
+		$('#returnMenu').bind("click",function(){
+				slide(0);
+		});
 	}
 
 

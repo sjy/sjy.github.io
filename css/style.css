@@ -1796,6 +1796,7 @@ pre .css ~ * .id {
   position: relative;
   width: 70px;
   text-align: center;
+  display: none;
 }
 .switch-btn .tips-box {
   position: relative;

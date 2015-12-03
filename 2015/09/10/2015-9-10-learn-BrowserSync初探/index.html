@@ -3,22 +3,22 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Browsersunc初探 | Johnson森&#39;s Blog</title>
+  <title>Browsersync初探 | Johnson森&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="偶然间在搜索web测试的时候看到这么一篇牛气的的博客移动端前端开发调试-于江水,好奇Browsesync 这个神奇的工具，就开始了折腾之旅。
 安装推荐按照 browsersync中文网的教程安装，吐槽下，本人强迫症发作，全局安装方式遇到了各种坑，推荐同学们使用本地安装方式，就像教程里推荐的一样。1$ npm install browser-sync --save-dev
 打开静态网页，默认打开所在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Browsersunc初探">
-<meta property="og:url" content="http://sjy.github.io/2015/09/10/Browsersunc初探/index.html">
+<meta property="og:title" content="Browsersync初探">
+<meta property="og:url" content="http://sjy.github.io/2015/09/10/2015-9-10-Learn-BrowserSync初探/index.html">
 <meta property="og:site_name" content="Johnson森's Blog">
 <meta property="og:description" content="偶然间在搜索web测试的时候看到这么一篇牛气的的博客移动端前端开发调试-于江水,好奇Browsesync 这个神奇的工具，就开始了折腾之旅。
 安装推荐按照 browsersync中文网的教程安装，吐槽下，本人强迫症发作，全局安装方式遇到了各种坑，推荐同学们使用本地安装方式，就像教程里推荐的一样。1$ npm install browser-sync --save-dev
 打开静态网页，默认打开所在">
 <meta property="og:image" content="http://sjy.github.io/test.jpg">
-<meta property="og:updated_time" content="2015-11-24T13:17:36.167Z">
+<meta property="og:updated_time" content="2015-12-01T05:48:03.840Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Browsersunc初探">
+<meta name="twitter:title" content="Browsersync初探">
 <meta name="twitter:description" content="偶然间在搜索web测试的时候看到这么一篇牛气的的博客移动端前端开发调试-于江水,好奇Browsesync 这个神奇的工具，就开始了折腾之旅。
 安装推荐按照 browsersync中文网的教程安装，吐槽下，本人强迫症发作，全局安装方式遇到了各种坑，推荐同学们使用本地安装方式，就像教程里推荐的一样。1$ npm install browser-sync --save-dev
 打开静态网页，默认打开所在">
@@ -36,7 +36,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="https://s.gravatar.com/avatar/5c6aef827966afb46a5560363d45893d?s=128" class="js-avatar">
+			<img lazy-src="/gravatar.jpeg" class="js-avatar">
 			
 		</a>
 
@@ -62,7 +62,7 @@
 						
 						
 					</div>
-					
+
 				</div>
 				<div class="tips-box hide">
 					<div class="tips-arrow"></div>
@@ -81,11 +81,16 @@
 				<section class="switch-part switch-part1">
 					<nav class="header-menu">
 						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
+							
+								<li><a href="/">主页</a></li>
+		        	
+								<li><a href="/archives">所有文章</a></li>
+		        	
+								<li><a href="/about">关于我</a></li>
+		        	
+								
+									<li><a class="showTagCloud" href="javascript:void(0)" >标签云</a></li>
+								
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -102,22 +107,24 @@
 						</div>
 					</nav>
 				</section>
-				
+
 				
 				<section class="switch-part switch-part2">
+					<a href="javascript:void(0)" id="returnMenu">&#8592;&nbsp;返回</a>
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/browsersync/" style="font-size: 10px;">browsersync</a> <a href="/tags/editor/" style="font-size: 10px;">editor</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascrip/" style="font-size: 10px;">javascrip</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/tool/" style="font-size: 20px;">tool</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/browsersync/" style="font-size: 10px;">browsersync</a> <a href="/tags/editor/" style="font-size: 10px;">editor</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascrip/" style="font-size: 10px;">javascrip</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/tool/" style="font-size: 20px;">tool</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
 					</div>
 				</section>
 				
-				
+
 				
 
 				
 			</div>
 		</div>
-	</header>				
+	</header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
@@ -128,7 +135,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="https://s.gravatar.com/avatar/5c6aef827966afb46a5560363d45893d?s=128" class="js-avatar">
+				<img lazy-src="/gravatar.jpeg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">Johnson Shi</h1>
@@ -142,6 +149,8 @@
 					<li><a href="/">主页</a></li>
 		        
 					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
 		        
 		        <div class="clearfix"></div>
 				</ul>
@@ -162,10 +171,10 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-Browsersunc初探" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2015-9-10-Learn-BrowserSync初探" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/10/Browsersunc初探/" class="article-date">
+      <a href="/2015/09/10/2015-9-10-Learn-BrowserSync初探/" class="article-date">
   	<time datetime="2015-09-10T06:38:11.000Z" itemprop="datePublished">2015-09-10</time>
 </a>
     </div>
@@ -179,7 +188,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      Browsersunc初探
+      Browsersync初探
     </h1>
   
 
@@ -254,7 +263,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="Browsersunc初探" data-title="Browsersunc初探" data-url="http://sjy.github.io/2015/09/10/Browsersunc初探/"></div>
+	<div class="ds-thread" data-thread-key="2015-9-10-Learn-BrowserSync初探" data-title="Browsersync初探" data-url="http://sjy.github.io/2015/09/10/2015-9-10-Learn-BrowserSync初探/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

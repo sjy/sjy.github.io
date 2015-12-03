@@ -12,6 +12,7 @@ define([], function(){
 				$tipBox.addClass("hide");
 			},
 			init: function(){
+				
 			}
 		}
 	})();
@@ -35,7 +36,8 @@ define([], function(){
 		$(".icon-wrap").eq(idx).removeClass("hide");
 	}
 
-	var bind = function(){
+  var bind = function(){
+    debugger
 		var switchBtn = $("#myonoffswitch");
 		var tagcloud = $(".second-part");
 		var navDiv = $(".first-part");
@@ -85,14 +87,9 @@ define([], function(){
 			slide(idx);
 			Tips.hide();
 		});
-
-		$('.showTagCloud').bind("click",function(){
-				slide(1);
-		});
 	}
 
-
-
+	
 
 	return {
 		init: function(){

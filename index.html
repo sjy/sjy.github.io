@@ -28,7 +28,7 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="https://s.gravatar.com/avatar/5c6aef827966afb46a5560363d45893d?s=128" class="js-avatar">
+			<img lazy-src="/gravatar.jpeg" class="js-avatar">
 			
 		</a>
 
@@ -54,7 +54,7 @@
 						
 						
 					</div>
-					
+
 				</div>
 				<div class="tips-box hide">
 					<div class="tips-arrow"></div>
@@ -73,11 +73,16 @@
 				<section class="switch-part switch-part1">
 					<nav class="header-menu">
 						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
+							
+								<li><a href="/">主页</a></li>
+		        	
+								<li><a href="/archives">所有文章</a></li>
+		        	
+								<li><a href="/about">关于我</a></li>
+		        	
+								
+									<li><a class="showTagCloud" href="javascript:void(0)" >标签云</a></li>
+								
 						</ul>
 					</nav>
 					<nav class="header-nav">
@@ -94,22 +99,24 @@
 						</div>
 					</nav>
 				</section>
-				
+
 				
 				<section class="switch-part switch-part2">
+					<a href="javascript:void(0)" id="returnMenu">&#8592;&nbsp;返回</a>
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/browsersync/" style="font-size: 10px;">browsersync</a> <a href="/tags/editor/" style="font-size: 10px;">editor</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascrip/" style="font-size: 10px;">javascrip</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/tool/" style="font-size: 20px;">tool</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
+						<a href="/tags/ES6/" style="font-size: 10px;">ES6</a> <a href="/tags/JavaScript/" style="font-size: 10px;">JavaScript</a> <a href="/tags/atom/" style="font-size: 10px;">atom</a> <a href="/tags/blog/" style="font-size: 10px;">blog</a> <a href="/tags/browsersync/" style="font-size: 10px;">browsersync</a> <a href="/tags/editor/" style="font-size: 10px;">editor</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascrip/" style="font-size: 10px;">javascrip</a> <a href="/tags/javascript/" style="font-size: 10px;">javascript</a> <a href="/tags/nodejs/" style="font-size: 10px;">nodejs</a> <a href="/tags/tool/" style="font-size: 20px;">tool</a> <a href="/tags/web/" style="font-size: 10px;">web</a>
 					</div>
 				</section>
 				
-				
+
 				
 
 				
 			</div>
 		</div>
-	</header>				
+	</header>
 </div>
+
     </div>
     <div class="mid-col">
       <nav id="mobile-nav">
@@ -120,7 +127,7 @@
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="https://s.gravatar.com/avatar/5c6aef827966afb46a5560363d45893d?s=128" class="js-avatar">
+				<img lazy-src="/gravatar.jpeg" class="js-avatar">
 			</div>
 			<hgroup>
 			  <h1 class="header-author">Johnson Shi</h1>
@@ -134,6 +141,8 @@
 					<li><a href="/">主页</a></li>
 		        
 					<li><a href="/archives">所有文章</a></li>
+		        
+					<li><a href="/about">关于我</a></li>
 		        
 		        <div class="clearfix"></div>
 				</ul>
@@ -155,6 +164,72 @@
 	</div>
 </nav>
       <div class="body-wrap">
+  
+    <article id="false-Learn-ES6" class="article article-type-false" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/25/Learn-ES6/" class="article-date">
+  	<time datetime="2015-11-25T04:03:00.000Z" itemprop="datePublished">2015-11-25</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/25/Learn-ES6/">Learn-ES6</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="引言">引言</h2><p>直接看 <strong><a href="http://www.ruanyifeng.com/blog/" target="_blank" rel="external">阮一峰</a></strong> 写的关于ES6方方面面的开源书<strong><a href="https://github.com/ruanyf/es6tutorial" target="_blank" rel="external">《ECMAScript6入门》</a></strong>,我在<a href="https://github.com/sjy/es6tutorial" target="_blank" rel="external">github</a> 上fork了这一本书，有兴趣的同学可以和我一样fork或者report issue， 支持支持好项目、好想法。</p>
+<h2 id="笔记">笔记</h2><h3 id="Babel_转码工具">Babel 转码工具</h3><p>Babel 可以在命令行 在node环境, 在浏览器里把ES6语法的代码和 jsx代码转为ES5的代码，网站还给出了一个REPL环境，可以实现在线转码，体会ES6语言的魅力，这个是<a href="https://babeljs.io/repl/" target="_blank" rel="external">传送门</a>由于写作时间的原因（babel更新到了6），阮老师的babel安装配置代码需要更新。</p>
+<h4 id="测试文件es6-js">测试文件es6.js</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">"use strict"</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>].map(x =&gt; x * x));</span><br></pre></td></tr></table></figure>
+<h4 id="安装命令行环境下的babel">安装命令行环境下的babel</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-cli -g</span><br></pre></td></tr></table></figure>
+<h4 id="编译ES6代码为ES5，为了解耦，babel单独做了es2015模块">编译ES6代码为ES5，为了解耦，babel单独做了es2015模块</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm install babel-preset-<span class="number">2015</span> //必须先安装babel-preset-<span class="number">2015</span></span><br><span class="line">babel --presets es2015 es6.js</span><br></pre></td></tr></table></figure>
+<p>编译命令必须要指定安装的插件或者在执行目录下新建.babelrc文件，并且做相应配置<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  "<span class="attribute">plugins</span>": <span class="value">[]</span>,</span><br><span class="line">  "<span class="attribute">ignore</span>": <span class="value">[]</span>,</span><br><span class="line">  "<span class="attribute">presets</span>": <span class="value">[</span><br><span class="line">        <span class="string">"es2015"</span></span><br><span class="line">   ]</span><br><span class="line"></span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>通过Babel安各装种<a href="http://babeljs.io/docs/plugins/" target="_blank" rel="external">插件</a>可以体验ES7的部分特性，比如这个 <a href="http://masnun.com/2015/11/11/using-es7-asyncawait-today-with-babel.html" target="_blank" rel="external">asyn函数</a>Babel编译的速度还是有点慢的，所以在真实的生产环境都会放在服务端完成。</p>
+<h3 id="let">let</h3><p>类似于 var 但是 let只在代码块内有效，书中有个很生动的例子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>]();</span><br></pre></td></tr></table></figure>
+<p>生成的ES5代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="pi">"use strict"</span>;</span><br><span class="line"><span class="keyword">var</span> a = [];</span><br><span class="line"><span class="keyword">var</span> _loop = <span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123;</span><br><span class="line">  a[i] = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(i);</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</span><br><span class="line">  _loop(i);</span><br><span class="line">&#125;</span><br><span class="line">a[<span class="number">6</span>]();<span class="comment">//6</span></span><br></pre></td></tr></table></figure>
+<p>let声明的i只在本轮循环有效，所以每一次循环的i其实都是一个新的变量，所以最后输出的是6。</p>
+<h2 id="后续">后续</h2>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ES6/">ES6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/JavaScript/">JavaScript</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
   
     <article id="post-Learn-Atom" class="article article-type-post" itemscope itemprop="blogPost">
   
@@ -237,10 +312,10 @@
 
 
   
-    <article id="post-Browsersunc初探" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2015-9-10-Learn-BrowserSync初探" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2015/09/10/Browsersunc初探/" class="article-date">
+      <a href="/2015/09/10/2015-9-10-Learn-BrowserSync初探/" class="article-date">
   	<time datetime="2015-09-10T06:38:11.000Z" itemprop="datePublished">2015-09-10</time>
 </a>
     </div>
@@ -254,7 +329,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/10/Browsersunc初探/">Browsersunc初探</a>
+      <a class="article-title" href="/2015/09/10/2015-9-10-Learn-BrowserSync初探/">Browsersync初探</a>
     </h1>
   
 

@@ -130,6 +130,464 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-js-conf-2017" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/16/js-conf-2017/">参加 2017 JS Conference是怎么样的体验(Day 2)？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/16/js-conf-2017/" class="archive-article-date">
+  	<time datetime="2017-07-16T01:14:20.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Day2, 今天换到了前排侧边的位置，换一个视角看演讲。</p>
+<h2 id="使用Autopilot容器化微服务"><a href="#使用Autopilot容器化微服务" class="headerlink" title="使用Autopilot容器化微服务"></a>使用Autopilot容器化微服务</h2><p>这个哥们设计的slide很好玩，写了一个漫画系列介绍出现请求失败的定位问题，引入微服务的优点，而且介绍他写的sample库可以实现本地和云上一致的部署方式，现场演示了本地启动启动多个微服务的例子，而且可以实现伸缩部署（手动)，可视化和日志功能。对于研究怎么写一个node服务容器还是很有意义的。</p>
+<h2 id="Serverless-amp-API"><a href="#Serverless-amp-API" class="headerlink" title="Serverless &amp; API"></a>Serverless &amp; API</h2><p>第一次看到朴(piao)灵老师，阐述了FaaS是一个趋势（和上个主题类似），用cnpm下载的折线图说明服务可伸缩的重要性，mico serveice是多么好用，安利了‘他们’阿里云的FaaS服务是多好，并且现场在阿里云部署了一个 ‘续一秒’的node api服务。并且大致介绍了怎么实现lamda服务的scalable，而且承诺之后会完成一个微信相关的服务，可以实现在公众号自动回复。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Application -|<span class="built_in"> Service Group </span>-| Micro<span class="built_in"> Service </span>(Function)</div></pre></td></tr></table></figure>
+<h2 id="REST-gt-GraphQL"><a href="#REST-gt-GraphQL" class="headerlink" title="REST =&gt; GraphQL"></a>REST =&gt; GraphQL</h2><p>这个哥们绝对是惊喜，开场就是一口熟练的中文，ppt做的也很用心。了解到现场很多人都没有使用过GraphQL，强烈安利了一发, 讲了开发GraphQL主要分三步， 定义模型（schema）、类型定义， 和resolver。现场演示了使用GraphQL Launchpad, CodeSandbox 重构代码，对比传统调用restful api, 使用graphql可以省很多代码。最后安利了他们apollp team的很多开源工具。人也很nice，我看到会后他的github上就有pdf供下载，之后补上（记录的时候没有wifi啊）。</p>
+<p>上午下午基本是个分界线，</p>
+<p>第一个瑞典的嘉宾介绍了测试的必要性，很多冗余的话，关于Storybook实际有关系的就几个Slide，其他的Slide都是很有趣的动图，而且大部分都是关于猫的图片。第二个芬兰的兄弟来自wiredcraft，宽泛的介绍了API开发过程中需要生产化需要考虑的点，分享了一些心得（比如入口加id做追踪），后半部分就没什么印象了。 <code>基于nodejs开发物联网应用</code>, 讲师临时换了张老师(穆客)，阿里node核心团队，说物联网目前主要的应用领域安防例子,感慨了当年开发物联网应用（写汇编，看别人写的遗留代码）的灰色记忆；黄玄带来的关于PWA的演讲还是可圈可点，安利了下三星产品对SW的友好支持，下面是一些笔记</p>
+<h2 id="PWA"><a href="#PWA" class="headerlink" title="PWA"></a>PWA</h2><ul>
+<li>用好Service Workor， lifecycle (install, active) is an Extendable Web Manifesto(interface) with waitUntil, running (Fetch, Push, Message) store data into Cache Storage (Origin Storage: 同源)</li>
+<li>更新缓存，和重启SW会引入很多问题，因为有的时候起了Worker没立即生效，需要一些hack，有时候需要强制更新缓存，又和code splitting有关系；有时候缓存需要维护，定期更新（自定义更新算法）</li>
+<li>不错的工具, SW-Precache,<a href="https://www.npmjs.com/package/sw-precache-webpack-plugin" target="_blank" rel="external">sw-precache-webpack-plugin</a> <a href="https://github.com/GoogleChrome/sw-toolbox" target="_blank" rel="external">sw-toolbox</a>, <a href="https://workboxjs.org/" target="_blank" rel="external">Workbox</a></li>
+<li>PRPL原则, Push/Preload, Render, Pre-cache, Load, Code Splitting, Streaming Web App</li>
+<li>PWA, 不用深究其意义，为了更好UE</li>
+</ul>
+<h2 id="想一想"><a href="#想一想" class="headerlink" title="想一想"></a>想一想</h2><p>总结下这次大会JS相关的关键词，SSR, AOT, IoT, Serverless, JS在物联网的涉足面开始铺开了(微信群也有大量关于物流行业的应用)，云服务的趋势是微服务化，最大程度的节省运维的支出，把sclale的粒度细化到function，把API的定制能力交给前端, 应用优化方面可以考虑从服务器渲染和编译时优化上面。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">conference</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">2017</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-js-conf-2017" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/15/js-conf-2017/">参加 2017 JS Conference是怎么样的体验(Day 1)？</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/15/js-conf-2017/" class="archive-article-date">
+  	<time datetime="2017-07-14T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Day one, 第一次参加JS大会，小心愿达成，肯定得记下所见所闻所思呀。<br> 起的过早了，8点多就到了现场，当时人不多也不少，赞助商的摊位也很多，</p>
+<h3 id="前端编译时优化，"><a href="#前端编译时优化，" class="headerlink" title="前端编译时优化，"></a>前端编译时优化，</h3><p> 这个是下午第一场的演讲，是尤雨溪做的分享。slider很简洁。涉及了很多编译相关的库(<a href="babel-react-optimize">https://github.com/thejameskyle/babel-react-optimize</a>, rakt, relay moden, prepack, <a href="styletron">https://github.com/rtsao/styletron</a>)，介绍了编译优化的原因，用real life的例子说明怎么去做一些情况下(static html, code spliting, .etc)的编译优化。我很佩服的是他始终调研和学习各种新的库(比如，学习某库，同时设置client和server端的manifest文件，最大程度利用prefech，减少不必要的请求开销)，不断的完善vue的使用体验和功能特性，这样的开源项目不成功也是没道理了。</p>
+<h3 id="Angular移动端开发（Typescript-Nativescript"><a href="#Angular移动端开发（Typescript-Nativescript" class="headerlink" title="Angular移动端开发（Typescript, Nativescript)"></a>Angular移动端开发（Typescript, Nativescript)</h3><p>作者的演讲思路很好，声音也很洪亮; 介绍了angular4的特点，主要还是代码与dom解耦，并着重介绍了TS的优点，安利了VSCode, NativeScript。现场演示和debug一个NativeScript例子，故意让某些功能breakdown，模拟现实中的开发场景，增加了与观众的互动，demo的效果很不错，有机会可以试试NativeScript, 至于TS，本来就准备要写的。</p>
+<h3 id="使用-Ruff-OS开发IoT应用"><a href="#使用-Ruff-OS开发IoT应用" class="headerlink" title="使用 Ruff OS开发IoT应用"></a>使用 Ruff OS开发IoT应用</h3><p> 郑晔老师分享的东西确实不错，讲的好，效果也不错，就是外国友人可能一脸问号。现场演示了怎么从0开始一个基于ruff的项目，ruff有个cli工具rap，可以初始化项目，管理依赖（ruff提供了驱动库站点），比较亮眼的是，用js语言做了很好的抽象, 可以很方便的基于事件操控组件。看到几行代码就可以实现控制二极管亮灭的时候还是很惊艳的，祝福这个项目。<br> 会后的闪电研究，有一个类似马老板气场的兄弟介绍了阿里物联网前端团队的情况，其实没说啥干货，就2句话，IoT很牛逼，他们要招人。<br> <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">js =&gt; <span class="function"><span class="params">layout</span> =&gt;</span> hardware</div></pre></td></tr></table></figure></p>
+<p>nextjs的分享很不错，我在之前的post里更新了。关于其他的分享比如<code>理解现代web开发</code>(大而全，适合了解前端发展的历程，章节分类方法还是不错的)， 还有<code>react native开发你所需要知道的一切</code>作者讲的有些冗余，也略有紧张，节奏控制的不是很好. hax的<code>后es6时代的javascript语言</code>，其实就是讲了目前es7已结有的和可能会有的新特性，也透露了很多不知道的黑可以，关于shared memery 和 atomics。大写的PPT和引用<code>left-pad</code>是亮点。</p>
+<p>所有分享，网上均会有直播，大会的演讲ppt也会在wiredcraft微信号发布。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">conference</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">2017</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-interview-think" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/12/interview-think/">关于面试被面试的思考</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/12/interview-think/" class="archive-article-date">
+  	<time datetime="2017-07-11T16:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>很早就想写这篇博客了，我有3个阶段的找工作经历，在现在这家公司也有一些面试候选人的机会，综合来看，有些感慨。</p>
+<h3 id="我是面试者"><a href="#我是面试者" class="headerlink" title="我是面试者"></a>我是面试者</h3><ul>
+<li>怎么简历都是word格式</li>
+<li>这个候选人简历很厉害啊，给开源项目贡献过代码</li>
+<li>这个候选人怎么这个题都做不出啊</li>
+<li>怎么聊不下去，真的是做过这个项目<br>…<h3 id="我是被面试者"><a href="#我是被面试者" class="headerlink" title="我是被面试者"></a>我是被面试者</h3>可能有下面这些情况：</li>
+<li>我准备了很多，看了攻略，刷了题</li>
+<li>我啥也没准备，应为一个好的公司会发现我还是很不错的</li>
+<li>我算法不怎么熟，遇到了就死定了，我要好好突击下</li>
+<li>简历写好点就可以了<br>…<br>有个话总结的很好，作为面试官就是拿自己擅长的去考别人，候选人知道觉得没什么，不知道或者不会就觉得水平不行。所以一次面试的成功也是很有偶然性，还真的有“眼缘”的成分在。从面试官的角度，希望自己多点耐性，考察的方面尽可能多些；作为面试者，希望自己注意累积知识，保持一种积极的学习的状态，锻炼自己的表达能力和逻辑思维。</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-learn-next-js" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/09/learn-next-js/">学习 next.js</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/09/learn-next-js/" class="archive-article-date">
+  	<time datetime="2017-07-09T15:19:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="https://github.com/zeit/next.js/releases" target="_blank" rel="external">nextjs</a> 是一个server端渲染react组件的开源库 想要了解它的原因是</p>
+<ul>
+<li>这周nextjs作者会作分享，提前温习，憋要浪费门票</li>
+<li>服务器端渲染道听途说多，有必要实际了解下</li>
+<li>多学总没有坏处</li>
+</ul>
+<h2 id="打怪升级"><a href="#打怪升级" class="headerlink" title="打怪升级"></a>打怪升级</h2><p>next专门做了个<a href="https://learnnextjs.com/reviews" target="_blank" rel="external">网站</a>，提供轻松愉悦的学习路径。 章节内容安排的很下心，对react不熟悉的同学也很友好。</p>
+<ul>
+<li>有详细的解释</li>
+<li>有对应的demo项目</li>
+<li>阶段性小测验（单项解答），答对了会计分</li>
+</ul>
+<h2 id="console-on-browser-or-server-side"><a href="#console-on-browser-or-server-side" class="headerlink" title="console on browser or server side ?"></a>console on browser or server side ?</h2><p>关键看是在哪里render， 这不是废话吗? 举个例子:<br><a href="https://learnnextjs.com/basics/fetching-data-for-pages/fetching-batman-shows" target="_blank" rel="external">Fetch Batman Shows</a>, index 页面可以跳转到post页面，通过点击链接到post页面的时候，是client端fetch数据渲染的组件； 如果直接访问对应的post页面的url，则是server端监听请求，渲染和返回页面。</p>
+<h2 id="next-build"><a href="#next-build" class="headerlink" title="next build"></a>next build</h2><p> 会生成 .next 目录，包含bundle文件和压缩的源码;</p>
+<h2 id="next-start-p-8000"><a href="#next-start-p-8000" class="headerlink" title="next start -p 8000"></a>next start -p 8000</h2><p>端口随便开，可以同时开启任意多的实例, 可以和其他的node server集成使用, 下面是express的例子:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</div><div class="line"><span class="keyword">const</span> next = <span class="built_in">require</span>(<span class="string">'next'</span>)</div><div class="line"></div><div class="line"><span class="keyword">const</span> dev = process.env.NODE_ENV !== <span class="string">'production'</span></div><div class="line"><span class="keyword">const</span> app = next(&#123; dev &#125;)</div><div class="line"><span class="keyword">const</span> handle = app.getRequestHandler()</div><div class="line"></div><div class="line">app.prepare()</div><div class="line">.then(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="keyword">const</span> server = express()</div><div class="line"></div><div class="line">  server.get(<span class="string">'/p/:id'</span>, (req, res) =&gt; &#123;</div><div class="line">    <span class="keyword">const</span> actualPage = <span class="string">'/post'</span></div><div class="line">    <span class="keyword">const</span> queryParams = &#123; <span class="attr">title</span>: req.params.id &#125;</div><div class="line">    app.render(req, res, actualPage, queryParams)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  server.get(<span class="string">'*'</span>, (req, res) =&gt; &#123;</div><div class="line">    <span class="keyword">return</span> handle(req, res)</div><div class="line">  &#125;)</div><div class="line"></div><div class="line">  server.listen(<span class="number">3000</span>, (err) =&gt; &#123;</div><div class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'&gt; Ready on http://localhost:3000'</span>)</div><div class="line">  &#125;)</div><div class="line">&#125;)</div><div class="line">.catch(<span class="function">(<span class="params">ex</span>) =&gt;</span> &#123;</div><div class="line">  <span class="built_in">console</span>.error(ex.stack)</div><div class="line">  process.exit(<span class="number">1</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure></p>
+<h2 id="now"><a href="#now" class="headerlink" title="now ?"></a>now ?</h2><p>next 推荐使用的部署工具,总是会映射到80端口，不管start脚本配置的是什么端口</p>
+<h2 id="导出静态文件"><a href="#导出静态文件" class="headerlink" title="导出静态文件"></a>导出静态文件</h2><p>需要依赖nextjs 3.0以上版本, 需要配置next.config.js:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">  <span class="attr">exportPathMap</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      <span class="string">'/'</span>: &#123; <span class="attr">page</span>: <span class="string">'/'</span> &#125;,</div><div class="line">      <span class="string">'/about'</span>: &#123; <span class="attr">page</span>: <span class="string">'/about'</span> &#125;,</div><div class="line">      <span class="string">'/p/hello-nextjs'</span>: &#123;<span class="attr">page</span>: <span class="string">'/post'</span>, <span class="attr">query</span>: &#123; <span class="attr">title</span>: <span class="string">"Hello Next.js"</span> &#125; &#125;,</div><div class="line">      <span class="string">'/p/learn-nextjs'</span>: &#123; <span class="attr">page</span>: <span class="string">'/post'</span>, <span class="attr">query</span>: &#123; <span class="attr">title</span>: <span class="string">"Learn Next.js is awesome"</span> &#125; &#125;,</div><div class="line">      <span class="string">'/p/deploy-nextjs'</span>: &#123; <span class="attr">page</span>: <span class="string">'/post'</span>, <span class="attr">query</span>: &#123; <span class="attr">title</span>: <span class="string">"Deploy apps with Zeit"</span> &#125; &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>可以跑下面的命令<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># next build</span></div><div class="line">npm run build</div><div class="line"><span class="comment"># next export</span></div><div class="line">npm run <span class="built_in">export</span></div><div class="line"><span class="comment"># default export to out</span></div><div class="line"><span class="built_in">cd</span> out</div><div class="line"><span class="comment"># 使用其他的server也可以</span></div><div class="line">serve -p 8080</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>JS 大会第一个就是讲的这个，主讲人现场演示中文名’寞晓墨’, 介绍了nextjs, 现场打码建工程，科普了ssr的很多特点和nextjs的牛逼之处。<br>用例子(Hello world, Hacker News, Chat Room)讲解了<head>, dynamic modules, …；谈到的东西比较多，因为全是英文，只能几个大概了。总计就是nextjs可以适应不同lazy load， prefech, dynamic import的需求, 而且安利了一波antd……<br>在他做演示的时候我还留意到他使用的一个类似terminal的东西是叫hyper, 这个是基于web开发的一个terminal程序，回来后自己也安装了试用了下；<br>很尴尬。。网络不好，下了半天没下下来。等之后再写个使用说明吧</head></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">nextjs</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
+    <article id="post-review-rn" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/09/review-rn/">react native 学习记录</a>
+    </h1>
+  
+
+        
+        <a href="/2017/07/09/review-rn/" class="archive-article-date">
+  	<time datetime="2017-07-09T12:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ul>
+<li><em><a href="https://github.com/facebook/react-native" target="_blank" rel="external">Aframework for building native apps with React</a></em></li>
+<li>50k+ stars, 190 releases</li>
+<li>Showcases: FB, Airbnb, Baidu, QQ[androind], JD</li>
+<li><a href="https://facebook.github.io/react-native/versions.html" target="_blank" rel="external">facebook.github.io</a><ul>
+<li>guide - ‘Counter’</li>
+<li>api document (ios &amp;&amp; android)</li>
+<li>all release notes (latest stable rc: 0.46)</li>
+</ul>
+</li>
+<li><a href="https://www.toptal.com/mobile/comparing-react-native-to-cordova" target="_blank" rel="external">react native vs cordova</a><ul>
+<li><em>Learn once, write anywhere</em> vs <em>Write once, run anywhere</em></li>
+<li>native vs hybrid</li>
+<li>react vs <a href="https://cordova.apache.org/#supported_platforms_section" target="_blank" rel="external">?</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="react-gt-react-native"><a href="#react-gt-react-native" class="headerlink" title="react =&gt; react native"></a>react =&gt; react native</h2><ul>
+<li>react -&gt; react,</li>
+<li>redux, mobx -&gt; redux, mobx</li>
+<li>router -&gt; navigator,<ul>
+<li>native, <a href="https://github.com/airbnb/native-navigation/" target="_blank" rel="external">native-navigation</a>, <a href="https://github.com/wix/react-native-navigation" target="_blank" rel="external">react-native-navigation</a></li>
+<li>JS-based solutions, <a href="https://reactnavigation.org/" target="_blank" rel="external">react-navigation</a></li>
+</ul>
+</li>
+<li>react-dom, css, scss, fetch, timer, .etc-&gt; react-native</li>
+<li>…</li>
+<li>one project -&gt; three projects</li>
+</ul>
+<h2 id="Dev-Tools"><a href="#Dev-Tools" class="headerlink" title="Dev Tools"></a>Dev Tools</h2><ul>
+<li><a href="https://github.com/decosoftware/deco-ide" target="_blank" rel="external">Deco IDE</a></li>
+<li><a href="https://expo.io/" target="_blank" rel="external">Expo XDE</a></li>
+<li><a href="https://nuclide.io/" target="_blank" rel="external">Nuclide</a></li>
+<li>VS Code + Extensions,</li>
+<li>Simulator (ios), AVD or Genymotion (android)</li>
+</ul>
+<h2 id="Starter-Kit"><a href="#Starter-Kit" class="headerlink" title="Starter Kit"></a>Starter Kit</h2><ul>
+<li><a href="https://facebook.github.io/react-native/releases/next/docs/getting-started.html" target="_blank" rel="external">create-react-native-app</a></li>
+<li><a href="https://github.com/futurice/pepperoni-app-kit" target="_blank" rel="external">Pepperoni</a></li>
+<li><a href="https://www.npmjs.com/package/generator-react-native-ignite" target="_blank" rel="external">Ignite</a>, CLI and Yo Generator 2016-v0.38</li>
+<li><a href="http://makeitopen.com/tutorials/building-the-f8-app/planning/" target="_blank" rel="external">F8 App</a>, 2016-v0.28</li>
+<li><a href="https://github.com/akveo/kittenTricks" target="_blank" rel="external">kitten-tricks</a></li>
+</ul>
+<h2 id="Why-Ignite"><a href="#Why-Ignite" class="headerlink" title="Why Ignite ?"></a>Why Ignite ?</h2><ul>
+<li><em>Battle tested and used every day by the developers at Infinite Red</em></li>
+<li><em>An ever-expanding list of <a href="https://github.com/infinitered/ignite-ir-boilerplate" target="_blank" rel="external">boilerplates</a> and <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">plugins</a></em><ul>
+<li>Statement Management, Redux + Redux-Saga</li>
+<li>Animatable, <a href="https://github.com/oblador/react-native-animatable" target="_blank" rel="external">react-native-animatable</a></li>
+<li>Icons, <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">react-native-vector-icons</a></li>
+<li>Router, <a href="https://github.com/aksonov/react-native-router-flux" target="_blank" rel="external">react-native-router-flux</a></li>
+<li>I18n, <a href="https://github.com/AlexanderZaytsev/react-native-i18n" target="_blank" rel="external">react-native-i18n</a></li>
+<li>Mapview, <a href="https://github.com/airbnb/react-native-maps" target="_blank" rel="external">react-native-maps</a></li>
+<li>Themes</li>
+</ul>
+</li>
+</ul>
+<h2 id="Debug-android"><a href="#Debug-android" class="headerlink" title="Debug - android"></a>Debug - android</h2><ul>
+<li><p><a href="https://facebook.github.io/react-native/docs/running-on-device.html" target="_blank" rel="external">Run on Device</a></p>
+<ul>
+<li>check the dev options and required permisions</li>
+<li><p>debug on devide</p>
+<ul>
+<li><p>5.0+, via usb connection:</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb reverse tcp:8081 tcp:8081</div></pre></td></tr></table></figure>
+</li>
+<li><p>&lt;=5.0 via LAN, set proxy as dev-server’s addr</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Remote Debug JS, <a href="http://localhost:8081/debugger-ui" target="_blank" rel="external">debugger-ui</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=jingkaizhao.vscode-redux-devtools" target="_blank" rel="external">Redux DevTools by JK</a> or <a href="https://github.com/jhen0409/remote-redux-devtools-on-debugger" target="_blank" rel="external">remote-redux-devtools-on-debugger</a></li>
+</ul>
+<p><img src="../images/remote_debug.png" alt="remote-debug"></p>
+<h2 id="H享卡-MVP"><a href="#H享卡-MVP" class="headerlink" title="H享卡 - MVP"></a>H享卡 - MVP</h2><ul>
+<li>载入界面</li>
+<li>登陆控制</li>
+<li>个人信息</li>
+<li>通知消息</li>
+<li>优惠券</li>
+<li>礼品卡<div style="display:flex; align-items: flex-start;"><br>  <img src="../images/ios_1.png" width="30%"><br>  <img src="../images/ios_2.png" width="30%"><br>  <img src="../images/ios_3.png" width="30%"><br></div>
+
+</li>
+</ul>
+<h2 id="Other-Topics"><a href="#Other-Topics" class="headerlink" title="Other Topics"></a>Other Topics</h2><ul>
+<li><a href="http://microsoft.github.io/code-push/" target="_blank" rel="external">Code Push</a></li>
+<li><a href="https://github.com/parse-community/parse-server" target="_blank" rel="external">Parse Server</a>, mongo db</li>
+<li><a href="https://github.com/airbnb/lottie-react-native" target="_blank" rel="external">Lottie</a></li>
+<li>Awesome Repo !!!<ul>
+<li><a href="https://github.com/wix/react-native-interactable" target="_blank" rel="external">react-native-interactable</a></li>
+<li><a href="https://github.com/airbnb/native-navigation" target="_blank" rel="external">native-navigation</a></li>
+<li><a href="https://github.com/jondot/awesome-react-native" target="_blank" rel="external">awesome-react-native</a></li>
+<li><a href="https://github.com/akveo/react-native-ui-kitten" target="_blank" rel="external">ui-kitten</a></li>
+</ul>
+</li>
+</ul>
+<p><img src="../images/parse_server.png" alt="parse-server"></p>
+<p><img src="../images/lottie_1.gif" alt="lottie"></p>
+<p><img src="../images/lottie_2.gif" alt="lottie"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react native</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">zaihui</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-see-you-again" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -137,13 +595,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/09/see-you-again/">See You Again</a>
+      <a class="article-title" href="/2017/07/08/see-you-again/">See You Again</a>
     </h1>
   
 
         
-        <a href="/2017/07/09/see-you-again/" class="archive-article-date">
-  	<time datetime="2017-07-08T17:11:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
+        <a href="/2017/07/08/see-you-again/" class="archive-article-date">
+  	<time datetime="2017-07-07T17:11:19.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-08</time>
 </a>
         
       </header>

@@ -6,18 +6,25 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://sjy.github.io">
-  <title>Tag: 面试 | Johnson&#39;s Blog</title>
+  <title>使用charls抓取安卓端的https请求 | Johnson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Blog About Johnson">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Johnson&#39;s Blog">
-<meta property="og:url" content="http://sjy.github.io/tags/面试/index.html">
+  <meta name="description" content="最近帮阿茂抓包，看手机上软件市场相关的请求特征，顺便又学习了下charls抓https请求的方法。mac上或者pc上比较好实现，直接允许目标域名可以通过ssl代理就可以了，问题是在来自手机端的请求这样操作后没有生效，发现还需要额外的步骤： 允许目标域名接受ssl代理可以直接在Structure的htts域名上右键选择enable ssl proxing,或者在Proxy菜单下的SSL Proxin">
+<meta name="keywords" content="charls,ssl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用charls抓取安卓端的https请求">
+<meta property="og:url" content="http://sjy.github.io/2017/08/04/charls-scrapy-android-https/index.html">
 <meta property="og:site_name" content="Johnson&#39;s Blog">
-<meta property="og:description" content="Blog About Johnson">
+<meta property="og:description" content="最近帮阿茂抓包，看手机上软件市场相关的请求特征，顺便又学习了下charls抓https请求的方法。mac上或者pc上比较好实现，直接允许目标域名可以通过ssl代理就可以了，问题是在来自手机端的请求这样操作后没有生效，发现还需要额外的步骤： 允许目标域名接受ssl代理可以直接在Structure的htts域名上右键选择enable ssl proxing,或者在Proxy菜单下的SSL Proxin">
 <meta property="og:locale" content="zh">
+<meta property="og:image" content="http://sjy.github.io/2017/08/04/images/android_ssl_1.png">
+<meta property="og:image" content="http://sjy.github.io/2017/08/04/images/android_ssl_2.png">
+<meta property="og:image" content="http://sjy.github.io/2017/08/04/images/android_ssl_3.png">
+<meta property="og:image" content="http://sjy.github.io/2017/08/04/images/ssl_proxy.png">
+<meta property="og:updated_time" content="2017-08-05T10:44:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Johnson&#39;s Blog">
-<meta name="twitter:description" content="Blog About Johnson">
+<meta name="twitter:title" content="使用charls抓取安卓端的https请求">
+<meta name="twitter:description" content="最近帮阿茂抓包，看手机上软件市场相关的请求特征，顺便又学习了下charls抓https请求的方法。mac上或者pc上比较好实现，直接允许目标域名可以通过ssl代理就可以了，问题是在来自手机端的请求这样操作后没有生效，发现还需要额外的步骤： 允许目标域名接受ssl代理可以直接在Structure的htts域名上右键选择enable ssl proxing,或者在Proxy菜单下的SSL Proxin">
+<meta name="twitter:image" content="http://sjy.github.io/2017/08/04/images/android_ssl_1.png">
   
     <link rel="alternative" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
   
@@ -129,64 +136,91 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-charls-scrapy-android-https" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/07/12/interview-think/" class="archive-article-date">
-  	<time datetime="2017-07-11T16:31:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-12</time>
-</a>
-        </div>
-    	 
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/07/12/interview-think/">关于面试被面试的思考</a>
+    <h1 class="article-title" itemprop="name">
+      使用charls抓取安卓端的https请求
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+        
+        <a href="/2017/08/04/charls-scrapy-android-https/" class="archive-article-date">
+  	<time datetime="2017-08-04T15:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-08-04</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>最近帮阿茂抓包，看手机上软件市场相关的请求特征，顺便又学习了下charls抓https请求的方法。mac上或者pc上比较好实现，直接允许目标域名可以通过ssl代理就可以了，<br>问题是在来自手机端的请求这样操作后没有生效，发现还需要额外的步骤：</p>
+<h2 id="允许目标域名接受ssl代理"><a href="#允许目标域名接受ssl代理" class="headerlink" title="允许目标域名接受ssl代理"></a>允许目标域名接受ssl代理</h2><p>可以直接在Structure的htts域名上右键选择<code>enable ssl proxing</code>,或者在Proxy菜单下的SSL Proxing Settings里把域名手动添加到允许代理的域名列表里面。</p>
+<h2 id="安装charls的根证书到电脑里"><a href="#安装charls的根证书到电脑里" class="headerlink" title="安装charls的根证书到电脑里"></a>安装charls的根证书到电脑里</h2><p>手机和电脑端抓包都需要这个操作，路径<code>help &gt; SSL Proxing &gt; Installl Charls Root Certificate</code></p>
+<h2 id="手机端安装cert证书"><a href="#手机端安装cert证书" class="headerlink" title="手机端安装cert证书"></a>手机端安装cert证书</h2><p>和上一部操作类似，点击<code>help &gt; SSL Proxing &gt; Installl Charls Root Certificate on a mobile device or a remote browser</code>, 会提示下面的文字细信息</p>
+<blockquote>
+<p>Configure your device to use Charles as its HTTP proxy on _proxy_ip_address:_port, then browse to chls.pro/ssl to download and install the certificate.</p>
+</blockquote>
+<p>其实就是在已经设置代理的情况下（如安卓手动设置了代理为charls对的代理地址和端口），然后访问<code>chls.pro/ssl</code>, 会下载一个<code>getssl.cert</code>的文件, 这个就是主角了。直接点击安装会提示安装失败（我的是小米note，安卓6）。<br>这个时候就要手动安装证书了， 需要在安卓的系统设置里打开<code>证书&gt;安装&gt;从下载位置</code>，其他系统的操作类似，安装成功后就可以在charls里看到https相关的请求的完整内容了。ps:我在安装的时候提示我输入手机密码凭证，可是我从来没有设置过密码额，如果之前没有设置过手机锁屏之类的密码就会遇到这个问题， 解决的办法是去设置一个锁屏密码，然后再重新操作一波安装证书的过程。几个操作界面的截图如下供参考</p>
+<p><img src="../images/android_ssl_1.png" width="33%" style="display: inline-block"> <img src="../images/android_ssl_2.png" width="33%" style="display: inline-block"><img src="../images/android_ssl_3.png" width="33%"><br><img src="../images/ssl_proxy.png" alt="ssl"></p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p><a href="http://www.jianshu.com/p/3bbf596c9ca6" target="_blank" rel="external">如何使用charles对Android Https进行抓包</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">面试</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">charls</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">随笔</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ssl</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
-        </div>
-        <div class="clearfix"></div>
-    </header>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
   
   
-    </div></section>
+    <a href="/2017/07/16/js-conf-2017/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">参加 2017 JS Conference是怎么样的体验(D2)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+
+  
+  
   
 
-    
+  
+
+  
 
 
           </div>
@@ -209,9 +243,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: true,
 		root: "/",

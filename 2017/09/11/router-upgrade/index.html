@@ -6,28 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://sjy.github.io">
-  <title>react native 学习记录 | Johnson&#39;s Blog</title>
+  <title>react router v4 与 code splitting实践 | Johnson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
-<meta name="keywords" content="javascript,react native,zaihui">
+  <meta name="description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646]) Breaking: Support h">
+<meta name="keywords" content="javascript,react,router,code splitting,optimization">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react native 学习记录">
-<meta property="og:url" content="http://sjy.github.io/2017/07/09/review-rn/index.html">
+<meta property="og:title" content="react router v4 与 code splitting实践">
+<meta property="og:url" content="http://sjy.github.io/2017/09/11/router-upgrade/index.html">
 <meta property="og:site_name" content="Johnson&#39;s Blog">
-<meta property="og:description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
+<meta property="og:description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646]) Breaking: Support h">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/remote_debug.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_1.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_2.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_3.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/parse_server.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/lottie_1.gif">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/lottie_2.gif">
-<meta property="og:updated_time" content="2017-07-10T15:31:41.000Z">
+<meta property="og:updated_time" content="2017-09-10T03:31:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react native 学习记录">
-<meta name="twitter:description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
-<meta name="twitter:image" content="http://sjy.github.io/2017/07/09/images/remote_debug.png">
+<meta name="twitter:title" content="react router v4 与 code splitting实践">
+<meta name="twitter:description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646]) Breaking: Support h">
   
     <link rel="alternative" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
   
@@ -139,126 +131,84 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div id="js-content" class="content-ll">
-            <article id="post-review-rn" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-router-upgrade" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      react native 学习记录
+      react router v4 与 code splitting实践
     </h1>
   
 
         
-        <a href="/2017/07/09/review-rn/" class="archive-article-date">
-  	<time datetime="2017-07-09T12:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
+        <a href="/2017/09/11/router-upgrade/" class="archive-article-date">
+  	<time datetime="2017-09-11T05:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ul>
-<li><em><a href="https://github.com/facebook/react-native" target="_blank" rel="external">Aframework for building native apps with React</a></em></li>
-<li>50k+ stars, 190 releases</li>
-<li>Showcases: FB, Airbnb, Baidu, QQ[androind], JD</li>
-<li><a href="https://facebook.github.io/react-native/versions.html" target="_blank" rel="external">facebook.github.io</a><ul>
-<li>guide - ‘Counter’</li>
-<li>api document (ios &amp;&amp; android)</li>
-<li>all release notes (latest stable rc: 0.46)</li>
-</ul>
-</li>
-<li><a href="https://www.toptal.com/mobile/comparing-react-native-to-cordova" target="_blank" rel="external">react native vs cordova</a><ul>
-<li><em>Learn once, write anywhere</em> vs <em>Write once, run anywhere</em></li>
-<li>native vs hybrid</li>
-<li>react vs <a href="https://cordova.apache.org/#supported_platforms_section" target="_blank" rel="external">?</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="react-gt-react-native"><a href="#react-gt-react-native" class="headerlink" title="react =&gt; react native"></a>react =&gt; react native</h2><ul>
-<li>react -&gt; react,</li>
-<li>redux, mobx -&gt; redux, mobx</li>
-<li>router -&gt; navigator,<ul>
-<li>native, <a href="https://github.com/airbnb/native-navigation/" target="_blank" rel="external">native-navigation</a>, <a href="https://github.com/wix/react-native-navigation" target="_blank" rel="external">react-native-navigation</a></li>
-<li>JS-based solutions, <a href="https://reactnavigation.org/" target="_blank" rel="external">react-navigation</a></li>
-</ul>
-</li>
-<li>react-dom, css, scss, fetch, timer, .etc-&gt; react-native</li>
-<li>…</li>
-<li>one project -&gt; three projects</li>
-</ul>
-<h2 id="Dev-Tools"><a href="#Dev-Tools" class="headerlink" title="Dev Tools"></a>Dev Tools</h2><ul>
-<li><a href="https://github.com/decosoftware/deco-ide" target="_blank" rel="external">Deco IDE</a></li>
-<li><a href="https://expo.io/" target="_blank" rel="external">Expo XDE</a></li>
-<li><a href="https://nuclide.io/" target="_blank" rel="external">Nuclide</a></li>
-<li>VS Code + Extensions,</li>
-<li>Simulator (ios), AVD or Genymotion (android)</li>
-</ul>
-<h2 id="Starter-Kit"><a href="#Starter-Kit" class="headerlink" title="Starter Kit"></a>Starter Kit</h2><ul>
-<li><a href="https://facebook.github.io/react-native/releases/next/docs/getting-started.html" target="_blank" rel="external">create-react-native-app</a></li>
-<li><a href="https://github.com/futurice/pepperoni-app-kit" target="_blank" rel="external">Pepperoni</a></li>
-<li><a href="https://www.npmjs.com/package/generator-react-native-ignite" target="_blank" rel="external">Ignite</a>, CLI and Yo Generator 2016-v0.38</li>
-<li><a href="http://makeitopen.com/tutorials/building-the-f8-app/planning/" target="_blank" rel="external">F8 App</a>, 2016-v0.28</li>
-<li><a href="https://github.com/akveo/kittenTricks" target="_blank" rel="external">kitten-tricks</a></li>
-</ul>
-<h2 id="Why-Ignite"><a href="#Why-Ignite" class="headerlink" title="Why Ignite ?"></a>Why Ignite ?</h2><ul>
-<li><em>Battle tested and used every day by the developers at Infinite Red</em></li>
-<li><em>An ever-expanding list of <a href="https://github.com/infinitered/ignite-ir-boilerplate" target="_blank" rel="external">boilerplates</a> and <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">plugins</a></em><ul>
-<li>Statement Management, Redux + Redux-Saga</li>
-<li>Animatable, <a href="https://github.com/oblador/react-native-animatable" target="_blank" rel="external">react-native-animatable</a></li>
-<li>Icons, <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">react-native-vector-icons</a></li>
-<li>Router, <a href="https://github.com/aksonov/react-native-router-flux" target="_blank" rel="external">react-native-router-flux</a></li>
-<li>I18n, <a href="https://github.com/AlexanderZaytsev/react-native-i18n" target="_blank" rel="external">react-native-i18n</a></li>
-<li>Mapview, <a href="https://github.com/airbnb/react-native-maps" target="_blank" rel="external">react-native-maps</a></li>
-<li>Themes</li>
-</ul>
-</li>
-</ul>
-<h2 id="Debug-android"><a href="#Debug-android" class="headerlink" title="Debug - android"></a>Debug - android</h2><ul>
-<li><p><a href="https://facebook.github.io/react-native/docs/running-on-device.html" target="_blank" rel="external">Run on Device</a></p>
+        <p>先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的<a href="https://github.com/ReactTraining/react-router/blob/master/CHANGES.md" target="_blank" rel="external">breack change</a>找了出来;</p>
+<h3 id="v3-0-0-alpha-2"><a href="#v3-0-0-alpha-2" class="headerlink" title="[v3.0.0-alpha.2]"></a>[v3.0.0-alpha.2]</h3><blockquote>
+<p>Jul 19, 2016</p>
+</blockquote>
 <ul>
-<li>check the dev options and required permisions</li>
-<li><p>debug on devide</p>
+<li><strong>Breaking:</strong> Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646])</li>
+<li><strong>Breaking:</strong> Support history v3 instead of history v2 ([#3647])</li>
+<li><strong>Feature:</strong> Add <code>router</code> to props for route components ([#3486])</li>
+</ul>
+<p>–</p>
+<h3 id="v3-0-0-alpha-1"><a href="#v3-0-0-alpha-1" class="headerlink" title="[v3.0.0-alpha.1]"></a>[v3.0.0-alpha.1]</h3><blockquote>
+<p>May 19, 2016</p>
+</blockquote>
 <ul>
-<li><p>5.0+, via usb connection:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb reverse tcp:8081 tcp:8081</div></pre></td></tr></table></figure>
-</li>
-<li><p>&lt;=5.0 via LAN, set proxy as dev-server’s addr</p>
-</li>
+<li><strong>Breaking:</strong> Remove all deprecated functionality as of v2.3.0 ([#3340], [#3435])</li>
+<li><strong>Breaking/Feature:</strong> Make <code>&lt;Link&gt;</code> and <code>withRouter</code> update inside static containers ([#3430], [#3443])</li>
+<li><strong>Feature:</strong> Add <code>params</code>, <code>location</code>, and <code>routes</code> to props injected by <code>withRouter</code> and to properties on <code>context.router</code> ([#3444], [#3446])</li>
 </ul>
-</li>
+<p>react router官方也很贴心，给出了详细的<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">迁移说明</a></p>
+<blockquote>
+<p>Read Me(<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md</a>)</p>
+</blockquote>
+<ul>
+<li>依赖变化，<code>react router</code>, v2.8.1 =&gt; v4.1.2</li>
+<li>不支持中心化的整体路由配置</li>
+<li>抽象出react router core包，纯浏览器应用可以安装react router dom</li>
+<li>和history有关的接口移除了，需要使用新的组件申明使用, 包括<browserrouter>, <hashrouter>, <memoryrouter></memoryrouter></hashrouter></browserrouter></li>
 </ul>
-</li>
-<li>Remote Debug JS, <a href="http://localhost:8081/debugger-ui" target="_blank" rel="external">debugger-ui</a></li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=jingkaizhao.vscode-redux-devtools" target="_blank" rel="external">Redux DevTools by JK</a> or <a href="https://github.com/jhen0409/remote-redux-devtools-on-debugger" target="_blank" rel="external">remote-redux-devtools-on-debugger</a></li>
+<h2 id="集成-redux"><a href="#集成-redux" class="headerlink" title="集成 redux"></a>集成 redux</h2><ul>
+<li>安装对应的<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">react-router-redux</a></li>
+<li>提供了路由hoc， withRouter</li>
+<li>深度整合，可以参考react router官网的说明（劝说不要深度整合，但是还是支持了） <a href="https://reacttraining.com/react-router/web/guides/redux-integration" target="_blank" rel="external">Deep Intergration?</a></li>
+<li>安装独立的 history 依赖， 配置store，<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">例子</a></li>
 </ul>
-<p><img src="../images/remote_debug.png" alt="remote-debug"></p>
-<h2 id="H享卡-MVP"><a href="#H享卡-MVP" class="headerlink" title="H享卡 - MVP"></a>H享卡 - MVP</h2><ul>
-<li>载入界面</li>
-<li>登陆控制</li>
-<li>个人信息</li>
-<li>通知消息</li>
-<li>优惠券</li>
-<li>礼品卡<div style="display:flex; align-items: flex-start;"><br>  <img src="../images/ios_1.png" width="30%"><br>  <img src="../images/ios_2.png" width="30%"><br>  <img src="../images/ios_3.png" width="30%"><br></div>
-
-</li>
-</ul>
-<h2 id="Other-Topics"><a href="#Other-Topics" class="headerlink" title="Other Topics"></a>Other Topics</h2><ul>
-<li><a href="http://microsoft.github.io/code-push/" target="_blank" rel="external">Code Push</a></li>
-<li><a href="https://github.com/parse-community/parse-server" target="_blank" rel="external">Parse Server</a>, mongo db</li>
-<li><a href="https://github.com/airbnb/lottie-react-native" target="_blank" rel="external">Lottie</a></li>
-<li>Awesome Repo !!!<ul>
-<li><a href="https://github.com/wix/react-native-interactable" target="_blank" rel="external">react-native-interactable</a></li>
-<li><a href="https://github.com/airbnb/native-navigation" target="_blank" rel="external">native-navigation</a></li>
-<li><a href="https://github.com/jondot/awesome-react-native" target="_blank" rel="external">awesome-react-native</a></li>
-<li><a href="https://github.com/akveo/react-native-ui-kitten" target="_blank" rel="external">ui-kitten</a></li>
-</ul>
+<h2 id="code-splitting"><a href="#code-splitting" class="headerlink" title="code splitting"></a>code splitting</h2><p>主要2个方面，使用什么方法提取公共的依赖，使用什么方法申明某个组件是要被拆出来做独立chunk；其实这2个方面都和webpack的配置密不可分。使用webpack2以后的版本都可以解决这2个问题;</p>
+<h3 id="用DLL-还是-commonsChunk"><a href="#用DLL-还是-commonsChunk" class="headerlink" title="用DLL 还是 commonsChunk ?"></a>用DLL 还是 commonsChunk ?</h3><p>这些都是提前公共依赖的方法</p>
+<ul>
+<li>ddl + ddl reference 插件需要配合使用，需要独立的webpack配置, 优点是独立编译打包，可以减少以往整体大包花费的时间。ddl拆封合理的话有利于多项目公用。</li>
+<li>commonsChunk 配置优化的方法也有许多，在实践过程中， 可以灵活配置minChunks属性按引用次数和引用位置打包可以比较好的做到拆分合理<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">minChunks: <span class="built_in">number</span>|Infinity|<span class="function"><span class="keyword">function</span>(<span class="title">module</span>, <span class="title">count</span>) -&gt; <span class="title">boolean</span>,</span></div><div class="line"> <span class="comment"> // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.</span></div><div class="line"> <span class="comment"> // The number must be greater than or equal 2 and lower than or equal to the number of chunks.</span></div><div class="line"> <span class="comment"> // Passing `Infinity` just creates the commons chunk, but moves no modules into it.</span></div><div class="line"> <span class="comment"> // By providing a `function` you can add custom logic. (Defaults to the number of chunks)</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<p><img src="../images/parse_server.png" alt="parse-server"></p>
-<p><img src="../images/lottie_1.gif" alt="lottie"></p>
-<p><img src="../images/lottie_2.gif" alt="lottie"></p>
+<p>还有一种方法就是独立配置verdor的entry，把所有用到的手动列出来，前提是项目不到，清楚需要的依赖。<br>具体使用哪种还是要按照实际项目的情况来合理选择。</p>
+<h3 id="拆分独立chunk方法"><a href="#拆分独立chunk方法" class="headerlink" title="拆分独立chunk方法"></a>拆分独立chunk方法</h3><ul>
+<li>动态import，使用直观，可以一定程度的做封装</li>
+<li>bundle loader， 这个是react router官方例子使用的方法，存在时间早，可配置项多些</li>
+<li>proise loader, 和 bundle loader 类似但是是用promise方式调用</li>
+</ul>
+<h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><ul>
+<li>很多项目是使用html plugin使用模版html插入生成的bundle文件，使用dll的时候，没有方法告诉html plugin它的chunk name, 这种情况可以使用<a href="https://www.npmjs.com/package/add-asset-html-webpack-plugin" target="_blank" rel="external">add-asset-html-webpack-plugin</a>, 估计以后会有新的插件或者接口支持吧</li>
+<li>查看打包和拆房情况, 推荐使用 <a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="external">webpack bundle analyzer</a>, 用treemap的形式直观展示chunk分布和占比情况，还可以配置设置gzip后或者原始输入大小 (parse gzip stat)</li>
+<li>多个项目build多个html文件但是使用一个webpack配置, 而且项目的依赖库结构差异比较大，这个情况下如果不care打包时间，可以使用commonsChunk，否则要使用dll就需要拆分配置（一个html plugin对应一个ddl asset)</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://reacttraining.com/react-router/" target="_blank" rel="external">非常推荐 reacttraining.com</a></li>
+<li><a href="https://robertknight.github.io/posts/webpack-dll-plugins/" target="_blank" rel="external">使用DDL优化编译，附其他code splitting方法比较</a></li>
+<li><a href="https://hackernoon.com/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f" target="_blank" rel="external">react router with webpack</a></li>
+<li><a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="external">webpack and code splitting</a></li>
+</ul>
 
       
 
@@ -276,11 +226,19 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react native</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">zaihui</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">router</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code splitting</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">optimization</a>
         		</li>
       		
 		</ul>
@@ -299,18 +257,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/07/09/learn-next-js/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          学习 next.js
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/07/08/see-you-again/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">See You Again</div>
+    <a href="/2017/08/04/charls-scrapy-android-https/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用charls抓取安卓端的https请求</div>
       <i class="icon-circle-right"></i>
     </a>
   

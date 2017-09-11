@@ -131,6 +131,134 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-router-upgrade" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/router-upgrade/">react router v4 与 code splitting实践</a>
+    </h1>
+  
+
+        
+        <a href="/2017/09/11/router-upgrade/" class="archive-article-date">
+  	<time datetime="2017-09-11T05:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的<a href="https://github.com/ReactTraining/react-router/blob/master/CHANGES.md" target="_blank" rel="external">breack change</a>找了出来;</p>
+<h3 id="v3-0-0-alpha-2"><a href="#v3-0-0-alpha-2" class="headerlink" title="[v3.0.0-alpha.2]"></a>[v3.0.0-alpha.2]</h3><blockquote>
+<p>Jul 19, 2016</p>
+</blockquote>
+<ul>
+<li><strong>Breaking:</strong> Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646])</li>
+<li><strong>Breaking:</strong> Support history v3 instead of history v2 ([#3647])</li>
+<li><strong>Feature:</strong> Add <code>router</code> to props for route components ([#3486])</li>
+</ul>
+<p>–</p>
+<h3 id="v3-0-0-alpha-1"><a href="#v3-0-0-alpha-1" class="headerlink" title="[v3.0.0-alpha.1]"></a>[v3.0.0-alpha.1]</h3><blockquote>
+<p>May 19, 2016</p>
+</blockquote>
+<ul>
+<li><strong>Breaking:</strong> Remove all deprecated functionality as of v2.3.0 ([#3340], [#3435])</li>
+<li><strong>Breaking/Feature:</strong> Make <code>&lt;Link&gt;</code> and <code>withRouter</code> update inside static containers ([#3430], [#3443])</li>
+<li><strong>Feature:</strong> Add <code>params</code>, <code>location</code>, and <code>routes</code> to props injected by <code>withRouter</code> and to properties on <code>context.router</code> ([#3444], [#3446])</li>
+</ul>
+<p>react router官方也很贴心，给出了详细的<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">迁移说明</a></p>
+<blockquote>
+<p>Read Me(<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md</a>)</p>
+</blockquote>
+<ul>
+<li>依赖变化，<code>react router</code>, v2.8.1 =&gt; v4.1.2</li>
+<li>不支持中心化的整体路由配置</li>
+<li>抽象出react router core包，纯浏览器应用可以安装react router dom</li>
+<li>和history有关的接口移除了，需要使用新的组件申明使用, 包括<browserrouter>, <hashrouter>, <memoryrouter></memoryrouter></hashrouter></browserrouter></li>
+</ul>
+<h2 id="集成-redux"><a href="#集成-redux" class="headerlink" title="集成 redux"></a>集成 redux</h2><ul>
+<li>安装对应的<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">react-router-redux</a></li>
+<li>提供了路由hoc， withRouter</li>
+<li>深度整合，可以参考react router官网的说明（劝说不要深度整合，但是还是支持了） <a href="https://reacttraining.com/react-router/web/guides/redux-integration" target="_blank" rel="external">Deep Intergration?</a></li>
+<li>安装独立的 history 依赖， 配置store，<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">例子</a></li>
+</ul>
+<h2 id="code-splitting"><a href="#code-splitting" class="headerlink" title="code splitting"></a>code splitting</h2><p>主要2个方面，使用什么方法提取公共的依赖，使用什么方法申明某个组件是要被拆出来做独立chunk；其实这2个方面都和webpack的配置密不可分。使用webpack2以后的版本都可以解决这2个问题;</p>
+<h3 id="用DLL-还是-commonsChunk"><a href="#用DLL-还是-commonsChunk" class="headerlink" title="用DLL 还是 commonsChunk ?"></a>用DLL 还是 commonsChunk ?</h3><p>这些都是提前公共依赖的方法</p>
+<ul>
+<li>ddl + ddl reference 插件需要配合使用，需要独立的webpack配置, 优点是独立编译打包，可以减少以往整体大包花费的时间。ddl拆封合理的话有利于多项目公用。</li>
+<li>commonsChunk 配置优化的方法也有许多，在实践过程中， 可以灵活配置minChunks属性按引用次数和引用位置打包可以比较好的做到拆分合理<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">minChunks: <span class="built_in">number</span>|Infinity|<span class="function"><span class="keyword">function</span>(<span class="title">module</span>, <span class="title">count</span>) -&gt; <span class="title">boolean</span>,</span></div><div class="line"> <span class="comment"> // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.</span></div><div class="line"> <span class="comment"> // The number must be greater than or equal 2 and lower than or equal to the number of chunks.</span></div><div class="line"> <span class="comment"> // Passing `Infinity` just creates the commons chunk, but moves no modules into it.</span></div><div class="line"> <span class="comment"> // By providing a `function` you can add custom logic. (Defaults to the number of chunks)</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>还有一种方法就是独立配置verdor的entry，把所有用到的手动列出来，前提是项目不到，清楚需要的依赖。<br>具体使用哪种还是要按照实际项目的情况来合理选择。</p>
+<h3 id="拆分独立chunk方法"><a href="#拆分独立chunk方法" class="headerlink" title="拆分独立chunk方法"></a>拆分独立chunk方法</h3><ul>
+<li>动态import，使用直观，可以一定程度的做封装</li>
+<li>bundle loader， 这个是react router官方例子使用的方法，存在时间早，可配置项多些</li>
+<li>proise loader, 和 bundle loader 类似但是是用promise方式调用</li>
+</ul>
+<h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><ul>
+<li>很多项目是使用html plugin使用模版html插入生成的bundle文件，使用dll的时候，没有方法告诉html plugin它的chunk name, 这种情况可以使用<a href="https://www.npmjs.com/package/add-asset-html-webpack-plugin" target="_blank" rel="external">add-asset-html-webpack-plugin</a>, 估计以后会有新的插件或者接口支持吧</li>
+<li>查看打包和拆房情况, 推荐使用 <a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="external">webpack bundle analyzer</a>, 用treemap的形式直观展示chunk分布和占比情况，还可以配置设置gzip后或者原始输入大小 (parse gzip stat)</li>
+<li>多个项目build多个html文件但是使用一个webpack配置, 而且项目的依赖库结构差异比较大，这个情况下如果不care打包时间，可以使用commonsChunk，否则要使用dll就需要拆分配置（一个html plugin对应一个ddl asset)</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
+<li><a href="https://reacttraining.com/react-router/" target="_blank" rel="external">非常推荐 reacttraining.com</a></li>
+<li><a href="https://robertknight.github.io/posts/webpack-dll-plugins/" target="_blank" rel="external">使用DDL优化编译，附其他code splitting方法比较</a></li>
+<li><a href="https://hackernoon.com/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f" target="_blank" rel="external">react router with webpack</a></li>
+<li><a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="external">webpack and code splitting</a></li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">javascript</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">router</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code splitting</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">optimization</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+  
     <article id="post-charls-scrapy-android-https" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -849,7 +977,7 @@ MathJax.Hub.Queue(function() {
     
     	<section class="tools-section tools-section-me" q-show="aboutme">
   	  	
-  	  		<div class="aboutme-wrap" id="js-aboutme">很惭愧&lt;br&gt;&lt;br&gt;只做了一点微小的工作&lt;br&gt;谢谢大家</div>
+  	  		<div class="aboutme-wrap" id="js-aboutme">博客会不停的更新，有任何的问题可以通过这个邮箱联系我 shijianyue47#gmail.com</div>
   	  	
     	</section>
     

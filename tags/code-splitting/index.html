@@ -6,28 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://sjy.github.io">
-  <title>react native 学习记录 | Johnson&#39;s Blog</title>
+  <title>Tag: code splitting | Johnson&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
-<meta name="keywords" content="javascript,react native,zaihui">
-<meta property="og:type" content="article">
-<meta property="og:title" content="react native 学习记录">
-<meta property="og:url" content="http://sjy.github.io/2017/07/09/review-rn/index.html">
+  <meta name="description" content="Blog About Johnson">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Johnson&#39;s Blog">
+<meta property="og:url" content="http://sjy.github.io/tags/code-splitting/index.html">
 <meta property="og:site_name" content="Johnson&#39;s Blog">
-<meta property="og:description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
+<meta property="og:description" content="Blog About Johnson">
 <meta property="og:locale" content="zh">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/remote_debug.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_1.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_2.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/ios_3.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/parse_server.png">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/lottie_1.gif">
-<meta property="og:image" content="http://sjy.github.io/2017/07/09/images/lottie_2.gif">
-<meta property="og:updated_time" content="2017-07-10T15:31:41.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react native 学习记录">
-<meta name="twitter:description" content="Overview Aframework for building native apps with React 50k+ stars, 190 releases Showcases: FB, Airbnb, Baidu, QQ[androind], JD facebook.github.io guide - ‘Counter’ api document (ios &amp;amp;&amp;amp; androi">
-<meta name="twitter:image" content="http://sjy.github.io/2017/07/09/images/remote_debug.png">
+<meta name="twitter:title" content="Johnson&#39;s Blog">
+<meta name="twitter:description" content="Blog About Johnson">
   
     <link rel="alternative" href="/atom.xml" title="Johnson&#39;s Blog" type="application/atom+xml">
   
@@ -139,134 +129,36 @@
       <div id="wrapper" class="body-wrap">
         <div class="menu-l">
           <div id="js-content" class="content-ll">
-            <article id="post-review-rn" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      react native 学习记录
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2017" class="archive-year">2017</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2017/09/11/router-upgrade/" class="archive-article-date">
+  	<time datetime="2017-09-11T05:43:16.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-09-11</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2017/09/11/router-upgrade/">react router v4 与 code splitting实践</a>
     </h1>
   
 
-        
-        <a href="/2017/07/09/review-rn/" class="archive-article-date">
-  	<time datetime="2017-07-09T12:53:27.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-07-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h1><ul>
-<li><em><a href="https://github.com/facebook/react-native" target="_blank" rel="external">Aframework for building native apps with React</a></em></li>
-<li>50k+ stars, 190 releases</li>
-<li>Showcases: FB, Airbnb, Baidu, QQ[androind], JD</li>
-<li><a href="https://facebook.github.io/react-native/versions.html" target="_blank" rel="external">facebook.github.io</a><ul>
-<li>guide - ‘Counter’</li>
-<li>api document (ios &amp;&amp; android)</li>
-<li>all release notes (latest stable rc: 0.46)</li>
-</ul>
-</li>
-<li><a href="https://www.toptal.com/mobile/comparing-react-native-to-cordova" target="_blank" rel="external">react native vs cordova</a><ul>
-<li><em>Learn once, write anywhere</em> vs <em>Write once, run anywhere</em></li>
-<li>native vs hybrid</li>
-<li>react vs <a href="https://cordova.apache.org/#supported_platforms_section" target="_blank" rel="external">?</a></li>
-</ul>
-</li>
-</ul>
-<h2 id="react-gt-react-native"><a href="#react-gt-react-native" class="headerlink" title="react =&gt; react native"></a>react =&gt; react native</h2><ul>
-<li>react -&gt; react,</li>
-<li>redux, mobx -&gt; redux, mobx</li>
-<li>router -&gt; navigator,<ul>
-<li>native, <a href="https://github.com/airbnb/native-navigation/" target="_blank" rel="external">native-navigation</a>, <a href="https://github.com/wix/react-native-navigation" target="_blank" rel="external">react-native-navigation</a></li>
-<li>JS-based solutions, <a href="https://reactnavigation.org/" target="_blank" rel="external">react-navigation</a></li>
-</ul>
-</li>
-<li>react-dom, css, scss, fetch, timer, .etc-&gt; react-native</li>
-<li>…</li>
-<li>one project -&gt; three projects</li>
-</ul>
-<h2 id="Dev-Tools"><a href="#Dev-Tools" class="headerlink" title="Dev Tools"></a>Dev Tools</h2><ul>
-<li><a href="https://github.com/decosoftware/deco-ide" target="_blank" rel="external">Deco IDE</a></li>
-<li><a href="https://expo.io/" target="_blank" rel="external">Expo XDE</a></li>
-<li><a href="https://nuclide.io/" target="_blank" rel="external">Nuclide</a></li>
-<li>VS Code + Extensions,</li>
-<li>Simulator (ios), AVD or Genymotion (android)</li>
-</ul>
-<h2 id="Starter-Kit"><a href="#Starter-Kit" class="headerlink" title="Starter Kit"></a>Starter Kit</h2><ul>
-<li><a href="https://facebook.github.io/react-native/releases/next/docs/getting-started.html" target="_blank" rel="external">create-react-native-app</a></li>
-<li><a href="https://github.com/futurice/pepperoni-app-kit" target="_blank" rel="external">Pepperoni</a></li>
-<li><a href="https://www.npmjs.com/package/generator-react-native-ignite" target="_blank" rel="external">Ignite</a>, CLI and Yo Generator 2016-v0.38</li>
-<li><a href="http://makeitopen.com/tutorials/building-the-f8-app/planning/" target="_blank" rel="external">F8 App</a>, 2016-v0.28</li>
-<li><a href="https://github.com/akveo/kittenTricks" target="_blank" rel="external">kitten-tricks</a></li>
-</ul>
-<h2 id="Why-Ignite"><a href="#Why-Ignite" class="headerlink" title="Why Ignite ?"></a>Why Ignite ?</h2><ul>
-<li><em>Battle tested and used every day by the developers at Infinite Red</em></li>
-<li><em>An ever-expanding list of <a href="https://github.com/infinitered/ignite-ir-boilerplate" target="_blank" rel="external">boilerplates</a> and <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">plugins</a></em><ul>
-<li>Statement Management, Redux + Redux-Saga</li>
-<li>Animatable, <a href="https://github.com/oblador/react-native-animatable" target="_blank" rel="external">react-native-animatable</a></li>
-<li>Icons, <a href="https://github.com/infinitered/ignite/blob/master/PLUGINS.md" target="_blank" rel="external">react-native-vector-icons</a></li>
-<li>Router, <a href="https://github.com/aksonov/react-native-router-flux" target="_blank" rel="external">react-native-router-flux</a></li>
-<li>I18n, <a href="https://github.com/AlexanderZaytsev/react-native-i18n" target="_blank" rel="external">react-native-i18n</a></li>
-<li>Mapview, <a href="https://github.com/airbnb/react-native-maps" target="_blank" rel="external">react-native-maps</a></li>
-<li>Themes</li>
-</ul>
-</li>
-</ul>
-<h2 id="Debug-android"><a href="#Debug-android" class="headerlink" title="Debug - android"></a>Debug - android</h2><ul>
-<li><p><a href="https://facebook.github.io/react-native/docs/running-on-device.html" target="_blank" rel="external">Run on Device</a></p>
-<ul>
-<li>check the dev options and required permisions</li>
-<li><p>debug on devide</p>
-<ul>
-<li><p>5.0+, via usb connection:</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">adb reverse tcp:8081 tcp:8081</div></pre></td></tr></table></figure>
-</li>
-<li><p>&lt;=5.0 via LAN, set proxy as dev-server’s addr</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Remote Debug JS, <a href="http://localhost:8081/debugger-ui" target="_blank" rel="external">debugger-ui</a></li>
-<li><a href="https://marketplace.visualstudio.com/items?itemName=jingkaizhao.vscode-redux-devtools" target="_blank" rel="external">Redux DevTools by JK</a> or <a href="https://github.com/jhen0409/remote-redux-devtools-on-debugger" target="_blank" rel="external">remote-redux-devtools-on-debugger</a></li>
-</ul>
-<p><img src="../images/remote_debug.png" alt="remote-debug"></p>
-<h2 id="H享卡-MVP"><a href="#H享卡-MVP" class="headerlink" title="H享卡 - MVP"></a>H享卡 - MVP</h2><ul>
-<li>载入界面</li>
-<li>登陆控制</li>
-<li>个人信息</li>
-<li>通知消息</li>
-<li>优惠券</li>
-<li>礼品卡<div style="display:flex; align-items: flex-start;"><br>  <img src="../images/ios_1.png" width="30%"><br>  <img src="../images/ios_2.png" width="30%"><br>  <img src="../images/ios_3.png" width="30%"><br></div>
-
-</li>
-</ul>
-<h2 id="Other-Topics"><a href="#Other-Topics" class="headerlink" title="Other Topics"></a>Other Topics</h2><ul>
-<li><a href="http://microsoft.github.io/code-push/" target="_blank" rel="external">Code Push</a></li>
-<li><a href="https://github.com/parse-community/parse-server" target="_blank" rel="external">Parse Server</a>, mongo db</li>
-<li><a href="https://github.com/airbnb/lottie-react-native" target="_blank" rel="external">Lottie</a></li>
-<li>Awesome Repo !!!<ul>
-<li><a href="https://github.com/wix/react-native-interactable" target="_blank" rel="external">react-native-interactable</a></li>
-<li><a href="https://github.com/airbnb/native-navigation" target="_blank" rel="external">native-navigation</a></li>
-<li><a href="https://github.com/jondot/awesome-react-native" target="_blank" rel="external">awesome-react-native</a></li>
-<li><a href="https://github.com/akveo/react-native-ui-kitten" target="_blank" rel="external">ui-kitten</a></li>
-</ul>
-</li>
-</ul>
-<p><img src="../images/parse_server.png" alt="parse-server"></p>
-<p><img src="../images/lottie_1.gif" alt="lottie"></p>
-<p><img src="../images/lottie_2.gif" alt="lottie"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
+        <div class="article-info info-on-right">
+          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
@@ -276,57 +168,37 @@
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">react native</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">react</a>
         		</li>
       		 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">zaihui</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">router</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">code splitting</a>
+        		</li>
+      		 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">optimization</a>
         		</li>
       		
 		</ul>
 	</div>
 
-      
+          
 
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2017/07/09/learn-next-js/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          学习 next.js
-        
-      </div>
-    </a>
   
   
-    <a href="/2017/07/08/see-you-again/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">See You Again</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
+    
 
 
           </div>
@@ -349,9 +221,9 @@
 	var yiliaConfig = {
 		mathjax: true,
 		isHome: false,
-		isPost: true,
+		isPost: false,
 		isArchive: false,
-		isTag: false,
+		isTag: true,
 		isCategory: false,
 		open_in_new: true,
 		root: "/",

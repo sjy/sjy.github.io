@@ -12,7 +12,7 @@
 
 
 
-  <meta name="description" content="react router v4 与 code splitting实践"/>
+  <meta name="description" content="升级React Router与Code Splitting实践"/>
 
 
 
@@ -35,18 +35,18 @@
 <link rel="canonical" href="http://sjy.github.io/2017/09/11/router-upgrade/"/>
 
 
-<meta name="description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.">
+<meta name="description" content="背景公司某SPA项目的代码越来越重，功能模块也越来多；而且里面的一个关键依赖react router的版本也有’年头’没有更新了。处于对欠技术债的恐惧以及小目标的召唤，就领了这个活：也就是标题说的2两件事，升级react router到最新版(v4)，使用code splitting拆分模块。 Breaking Ch">
 <meta name="keywords" content="javascript,react,router,code splitting,optimization">
 <meta property="og:type" content="article">
-<meta property="og:title" content="react router v4 与 code splitting实践">
+<meta property="og:title" content="升级React Router与Code Splitting实践">
 <meta property="og:url" content="http://sjy.github.io/2017/09/11/router-upgrade/index.html">
 <meta property="og:site_name" content="Johnson">
-<meta property="og:description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646]) Breaking: Support h">
+<meta property="og:description" content="背景公司某SPA项目的代码越来越重，功能模块也越来多；而且里面的一个关键依赖react router的版本也有’年头’没有更新了。处于对欠技术债的恐惧以及小目标的召唤，就领了这个活：也就是标题说的2两件事，升级react router到最新版(v4)，使用code splitting拆分模块。 Breaking Changes凡是这种大的重构工程首先要保证的是不影响重构前的所有功能，为了避免产生">
 <meta property="og:locale" content="zh">
-<meta property="og:updated_time" content="2017-09-10T03:31:11.000Z">
+<meta property="og:updated_time" content="2017-12-13T14:09:31.506Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="react router v4 与 code splitting实践">
-<meta name="twitter:description" content="先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的breack change找了出来; [v3.0.0-alpha.2] Jul 19, 2016   Breaking: Remove all deprecated functionality as of v2.6.0 ([#3603], [#3646]) Breaking: Support h">
+<meta name="twitter:title" content="升级React Router与Code Splitting实践">
+<meta name="twitter:description" content="背景公司某SPA项目的代码越来越重，功能模块也越来多；而且里面的一个关键依赖react router的版本也有’年头’没有更新了。处于对欠技术债的恐惧以及小目标的召唤，就领了这个活：也就是标题说的2两件事，升级react router到最新版(v4)，使用code splitting拆分模块。 Breaking Changes凡是这种大的重构工程首先要保证的是不影响重构前的所有功能，为了避免产生">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
@@ -71,7 +71,7 @@
 
 
 
-    <title> react router v4 与 code splitting实践 - Johnson </title>
+    <title> 升级React Router与Code Splitting实践 - Johnson </title>
   </head>
 
   <body>
@@ -117,7 +117,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          react router v4 与 code splitting实践
+          升级React Router与Code Splitting实践
         
       </h1>
 
@@ -130,7 +130,8 @@
 
     
             <div class="post-content">
-            <p>先前用的版本是v2，v2和v3用法差异不大，v4就是一个大版本， 我去githb官网瞅了下，把可能有关的<a href="https://github.com/ReactTraining/react-router/blob/master/CHANGES.md" target="_blank" rel="external">breack change</a>找了出来;</p>
+            <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>公司某SPA项目的代码越来越重，功能模块也越来多；而且里面的一个关键依赖<code>react router</code>的版本也有’年头’没有更新了。处于对欠技术债的恐惧以及小目标的召唤，就领了这个活：也就是标题说的2两件事，升级react router到最新版(v4)，使用code splitting拆分模块。</p>
+<h2 id="Breaking-Changes"><a href="#Breaking-Changes" class="headerlink" title="Breaking Changes"></a>Breaking Changes</h2><p>凡是这种大的重构工程首先要保证的是不影响重构前的所有功能，为了避免产生副作用，好好过一遍官方文档尤其是<code>Change Log</code>是非常必要的。具体来说就是react-routerv2到目标版本v4的所有大改动， <a href="https://github.com/ReactTraining/react-router/blob/master/CHANGES.md" target="_blank" rel="noopener">点击这里</a>查看详情<br>为了节省时间，我把主要的更新日志列在这了：</p>
 <h3 id="v3-0-0-alpha-2"><a href="#v3-0-0-alpha-2" class="headerlink" title="[v3.0.0-alpha.2]"></a>[v3.0.0-alpha.2]</h3><blockquote>
 <p>Jul 19, 2016</p>
 </blockquote>
@@ -148,29 +149,27 @@
 <li><strong>Breaking/Feature:</strong> Make <code>&lt;Link&gt;</code> and <code>withRouter</code> update inside static containers ([#3430], [#3443])</li>
 <li><strong>Feature:</strong> Add <code>params</code>, <code>location</code>, and <code>routes</code> to props injected by <code>withRouter</code> and to properties on <code>context.router</code> ([#3444], [#3446])</li>
 </ul>
-<p>react router官方也很贴心，给出了详细的<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">迁移说明</a></p>
-<blockquote>
-<p>Read Me(<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="external">https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md</a>)</p>
-</blockquote>
+<p>官方网站非常贴心，给出了详细的<a href="https://github.com/ReactTraining/react-router/blob/master/packages/react-router/docs/guides/migrating.md" target="_blank" rel="noopener">迁移指导</a></p>
+<p>为了节省时间，小弟总结一下：</p>
 <ul>
-<li>依赖变化，<code>react router</code>, v2.8.1 =&gt; v4.1.2</li>
-<li>不支持中心化的整体路由配置</li>
-<li>抽象出react router core包，纯浏览器应用可以安装react router dom</li>
-<li>和history有关的接口移除了，需要使用新的组件申明使用, 包括<browserrouter>, <hashrouter>, <memoryrouter></memoryrouter></hashrouter></browserrouter></li>
+<li>依赖变化, v2.8.1 =&gt; v4.1.2（这不是废话吗）</li>
+<li>不再支持中心化的全局路由配置</li>
+<li>抽象出react router core包，单独的浏览器应用可以安装react router dom这个依赖</li>
+<li>移除了和history有关的接口，可以使用新的组件实现旧有功能<figure class="highlight plain"><figcaption><span>/>, <hashrouter< span=""><a href="/>,"><memoryrouter>）```</memoryrouter></a></hashrouter<></span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br><span class="line">特别要说的是，如果要集成redux使用，这里也有几点要注意,</span><br><span class="line">安装对应的[react-router-redux](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux)</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h2 id="集成-redux"><a href="#集成-redux" class="headerlink" title="集成 redux"></a>集成 redux</h2><ul>
-<li>安装对应的<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">react-router-redux</a></li>
-<li>提供了路由hoc， withRouter</li>
-<li>深度整合，可以参考react router官网的说明（劝说不要深度整合，但是还是支持了） <a href="https://reacttraining.com/react-router/web/guides/redux-integration" target="_blank" rel="external">Deep Intergration?</a></li>
-<li>安装独立的 history 依赖， 配置store，<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="external">例子</a></li>
+<p>npm install –save react-router-redux@next<br><figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">- 使用提供的路由hoc关联路由信息到react component - withRouter</span><br><span class="line"></span><br><span class="line">``` javascript</span><br><span class="line">// before</span><br><span class="line"><span class="title">export</span> <span class="keyword">default</span> connect(<span class="title">mapStateToProps</span>)(<span class="type">Something</span>)</span><br><span class="line"></span><br><span class="line">// after</span><br><span class="line"><span class="keyword">import</span> &#123; withRouter &#125; from 'react-router-dom'</span><br><span class="line"><span class="title">export</span> <span class="keyword">default</span> withRouter(<span class="title">connect</span>(<span class="title">mapStateToProps</span>)(<span class="type">Something</span>)</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>深度整合，可以参考react router官网的说明（劝说不要深度整合，但还是支持了） <a href="https://reacttraining.com/react-router/web/guides/redux-integration" target="_blank" rel="noopener">Deep Intergration?</a></li>
+<li>安装独立的<code>history</code>依赖， 并且配置到redux store，<a href="https://github.com/ReactTraining/react-router/tree/master/packages/react-router-redux" target="_blank" rel="noopener">例子在这</a></li>
 </ul>
 <h2 id="code-splitting"><a href="#code-splitting" class="headerlink" title="code splitting"></a>code splitting</h2><p>主要2个方面，使用什么方法提取公共的依赖，使用什么方法申明某个组件是要被拆出来做独立chunk；其实这2个方面都和webpack的配置密不可分。使用webpack2以后的版本都可以解决这2个问题;</p>
 <h3 id="用DLL-还是-commonsChunk"><a href="#用DLL-还是-commonsChunk" class="headerlink" title="用DLL 还是 commonsChunk ?"></a>用DLL 还是 commonsChunk ?</h3><p>这些都是提前公共依赖的方法</p>
 <ul>
 <li>ddl + ddl reference 插件需要配合使用，需要独立的webpack配置, 优点是独立编译打包，可以减少以往整体大包花费的时间。ddl拆封合理的话有利于多项目公用。</li>
-<li>commonsChunk 配置优化的方法也有许多，在实践过程中， 可以灵活配置minChunks属性按引用次数和引用位置打包可以比较好的做到拆分合理<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">minChunks: <span class="built_in">number</span>|Infinity|<span class="function"><span class="keyword">function</span>(<span class="title">module</span>, <span class="title">count</span>) -&gt; <span class="title">boolean</span>,</span></div><div class="line"> <span class="comment"> // The minimum number of chunks which need to contain a module before it's moved into the commons chunk.</span></div><div class="line"> <span class="comment"> // The number must be greater than or equal 2 and lower than or equal to the number of chunks.</span></div><div class="line"> <span class="comment"> // Passing `Infinity` just creates the commons chunk, but moves no modules into it.</span></div><div class="line"> <span class="comment"> // By providing a `function` you can add custom logic. (Defaults to the number of chunks)</span></div></pre></td></tr></table></figure>
-</li>
+<li>commonsChunk 配置优化的方法也有许多，在实践过程中，可以灵活配置minChunks属性按引用次数和引用位置打包可以比较好的做到拆分合理</li>
 </ul>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">minChunks: number<span class="string">|Infinity|function(module, count) -&gt; boolean,</span></span><br><span class="line">  <span class="comment">// The minimum number of chunks which need to contain a module before it's moved into the commons chunk.</span></span><br><span class="line">  <span class="comment">// The number must be greater than or equal 2 and lower than or equal to the number of chunks.</span></span><br><span class="line">  <span class="comment">// Passing `Infinity` just creates the commons chunk, but moves no modules into it.</span></span><br><span class="line">  <span class="comment">// By providing a `function` you can add custom logic. (Defaults to the number of chunks)</span></span><br></pre></td></tr></table></figure>
 <p>还有一种方法就是独立配置verdor的entry，把所有用到的手动列出来，前提是项目不到，清楚需要的依赖。<br>具体使用哪种还是要按照实际项目的情况来合理选择。</p>
 <h3 id="拆分独立chunk方法"><a href="#拆分独立chunk方法" class="headerlink" title="拆分独立chunk方法"></a>拆分独立chunk方法</h3><ul>
 <li>动态import，使用直观，可以一定程度的做封装</li>
@@ -178,15 +177,15 @@
 <li>proise loader, 和 bundle loader 类似但是是用promise方式调用</li>
 </ul>
 <h3 id="可能遇到的问题"><a href="#可能遇到的问题" class="headerlink" title="可能遇到的问题"></a>可能遇到的问题</h3><ul>
-<li>很多项目是使用html plugin使用模版html插入生成的bundle文件，使用dll的时候，没有方法告诉html plugin它的chunk name, 这种情况可以使用<a href="https://www.npmjs.com/package/add-asset-html-webpack-plugin" target="_blank" rel="external">add-asset-html-webpack-plugin</a>, 估计以后会有新的插件或者接口支持吧</li>
-<li>查看打包和拆房情况, 推荐使用 <a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="external">webpack bundle analyzer</a>, 用treemap的形式直观展示chunk分布和占比情况，还可以配置设置gzip后或者原始输入大小 (parse gzip stat)</li>
+<li>很多项目是使用html plugin使用模版html插入生成的bundle文件，使用dll的时候，没有方法告诉html plugin它的chunk name, 这种情况可以使用<a href="https://www.npmjs.com/package/add-asset-html-webpack-plugin" target="_blank" rel="noopener">add-asset-html-webpack-plugin</a>, 估计以后会有新的插件或者接口支持吧</li>
+<li>查看打包和拆房情况, 推荐使用 <a href="https://www.npmjs.com/package/webpack-bundle-analyzer" target="_blank" rel="noopener">webpack bundle analyzer</a>, 用treemap的形式直观展示chunk分布和占比情况，还可以配置设置gzip后或者原始输入大小 (parse gzip stat)</li>
 <li>多个项目build多个html文件但是使用一个webpack配置, 而且项目的依赖库结构差异比较大，这个情况下如果不care打包时间，可以使用commonsChunk，否则要使用dll就需要拆分配置（一个html plugin对应一个ddl asset)</li>
 </ul>
 <h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><ul>
-<li><a href="https://reacttraining.com/react-router/" target="_blank" rel="external">非常推荐 reacttraining.com</a></li>
-<li><a href="https://robertknight.github.io/posts/webpack-dll-plugins/" target="_blank" rel="external">使用DDL优化编译，附其他code splitting方法比较</a></li>
-<li><a href="https://hackernoon.com/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f" target="_blank" rel="external">react router with webpack</a></li>
-<li><a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="external">webpack and code splitting</a></li>
+<li><a href="https://reacttraining.com/react-router/" target="_blank" rel="noopener">非常推荐 reacttraining.com</a></li>
+<li><a href="https://robertknight.github.io/posts/webpack-dll-plugins/" target="_blank" rel="noopener">使用DDL优化编译，附其他code splitting方法比较</a></li>
+<li><a href="https://hackernoon.com/straightforward-code-splitting-with-react-and-webpack-4b94c28f6c3f" target="_blank" rel="noopener">react router with webpack</a></li>
+<li><a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="noopener">webpack and code splitting</a></li>
 </ul>
 
             </div>
